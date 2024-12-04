@@ -33,9 +33,9 @@ jobs:
             target: x86_64-unknown-linux-gnu
             clang_base_path: '/usr/lib/llvm-19'
 
-          #- os: ${{ github.repository == 'denoland/deno' && 'windows-2022-xxl' || 'windows-2022' }}
-          #  target: x86_64-pc-windows-msvc
-          #  clang_base_path: '/usr'
+          - os: ${{ github.repository == 'denoland/deno' && 'windows-2022-xxl' || 'windows-2022' }}
+            target: x86_64-pc-windows-msvc
+            clang_base_path: 'C:/Program Files/LLVM'
 
           - os: ${{ startsWith(github.repository, 'denoland/') && 'ubuntu-22.04-arm' || 'ubuntu-22.04-arm64' }}
             target: aarch64-unknown-linux-gnu
@@ -114,7 +114,7 @@ jobs:
           . $basename/sccache --start-server
           echo "$(pwd)/$basename" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
-      - name: Install Clang
+      - name: Install Clang on Ubuntu
         if: startsWith(matrix.config.os, 'ubuntu')
         run: |
           echo "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-19 main" | sudo dd of=/etc/apt/sources.list.d/llvm-toolchain-jammy-19.list
@@ -122,6 +122,11 @@ jobs:
           sudo apt-get update
           sudo apt-get -qq remove 'clang-*'
           sudo apt-get install lld-19 clang-19 clang-tools-19 clang-tidy-19 clang-format-19 -y
+
+      - name: Install Clang on Windows
+        if: startsWith(matrix.config.os, 'windows')
+        run: |
+          choco install llvm
 
       - name: Build
         env:

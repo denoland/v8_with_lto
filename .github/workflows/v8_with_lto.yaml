@@ -37,7 +37,7 @@ jobs:
           #  target: x86_64-pc-windows-msvc
           #  clang_base_path: '/usr'
 
-          - os: ${{ github.repository == 'denoland/deno' && 'ubuntu-22.04-xl' || 'ubuntu-22.04' }}
+          - os: ${{ startsWith(github.repository, 'denoland/') && 'ubuntu-22.04-xl' || 'ubuntu-22.04' }}
             target: aarch64-unknown-linux-gnu
             clang_base_path: '/usr/lib/llvm-19'
 

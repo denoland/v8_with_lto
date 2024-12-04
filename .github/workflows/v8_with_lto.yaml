@@ -21,13 +21,13 @@ jobs:
         !contains(github.event.pull_request.labels.*.name, 'no-fail-fast') }}
       matrix:
         config:
-          #- os: macos-13
-          #  target: x86_64-apple-darwin
-          #  clang_base_path: '/usr'
+          - os: macos-13
+            target: x86_64-apple-darwin
+            clang_base_path: '/usr/local/opt/llvm@19'
 
-          #- os: macos-14
-          #  target: aarch64-apple-darwin
-          #  clang_base_path: '/usr'
+          - os: macos-14
+            target: aarch64-apple-darwin
+            clang_base_path: '/opt/homebrew/opt/llvm@19'
 
           - os: ${{ startsWith(github.repository, 'denoland/') && 'ubuntu-22.04-xl' || 'ubuntu-22.04' }}
             target: x86_64-unknown-linux-gnu
@@ -123,6 +123,11 @@ jobs:
           sudo apt-get -qq remove 'clang-*'
           sudo apt-get install lld-19 clang-19 clang-tools-19 clang-tidy-19 clang-format-19 -y
 
+      - name: MacOS Setup
+        if: startsWith(matrix.config.os, 'macos')
+        run: |
+          brew install llvm@19
+
       - name: Windows Setup
         if: startsWith(matrix.config.os, 'windows')
         run: |
@@ -134,7 +139,6 @@ jobs:
           # file needs to exist for official windows build, just use dummy values.
           mkdir chrome
           echo "MAJOR=0`nMINOR=0`nBUILD=0`nPATCH=0`n" > chrome/VERSION
-
 
       - name: Build
         env:

@@ -139,7 +139,7 @@ jobs:
         env:
           SCCACHE_IDLE_TIMEOUT: 0
         run: |
-          curl https://gist.githubusercontent.com/devsnek/d5bb78e2644a783c9d5e8344ae502658/raw/9d6e4809aeb656aa631c53f607b119eca628e846/compiler-rt-adjust-paths.patch
+          curl -LO https://gist.githubusercontent.com/devsnek/d5bb78e2644a783c9d5e8344ae502658/raw/9d6e4809aeb656aa631c53f607b119eca628e846/compiler-rt-adjust-paths.patch
           patch -Np1 -i compiler-rt-adjust-paths.patch
           cargo build -vv --release --locked --target ${{ matrix.config.target }}
 

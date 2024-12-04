@@ -47,7 +47,6 @@ jobs:
             cargo: cargo
 
     env:
-      V8_FROM_SOURCE: true
       CLANG_BASE_PATH: /usr
       V8_FROM_SOURCE: 1
       EXTRA_GN_ARGS: 'is_official_build=true chrome_pgo_phase=0 is_cfi=false clang_version=19'

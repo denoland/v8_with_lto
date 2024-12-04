@@ -27,7 +27,7 @@ jobs:
           #- os: macos-14
           #  target: aarch64-apple-darwin
 
-          - os: ${{ github.repository == 'denoland/deno' && 'ubuntu-22.04-xl' || 'ubuntu-22.04' }}
+          - os: ${{ github.repository == 'denoland/deno' && 'ubuntu-22.04-xl' || 'ubuntu-22.04-xl' }}
             target: x86_64-unknown-linux-gnu
 
           #- os: ${{ github.repository == 'denoland/deno' && 'windows-2022-xxl' || 'windows-2022' }}

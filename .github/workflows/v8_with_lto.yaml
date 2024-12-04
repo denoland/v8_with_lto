@@ -127,6 +127,7 @@ jobs:
         if: startsWith(matrix.config.os, 'macos')
         run: |
           brew install llvm@19
+          brew install lld@19
 
       - name: Windows Setup
         if: startsWith(matrix.config.os, 'windows')

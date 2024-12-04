@@ -126,11 +126,11 @@ jobs:
       - name: Windows Setup
         if: startsWith(matrix.config.os, 'windows')
         run: |
-          choco install llvm
+          choco install llvm --version=19.1.0
 
           # file needs to exist for official windows build, just use dummy values.
           mkdir chrome
-          echo -e "MAJOR=0\nMINOR=0\nBUILD=0\nPATCH=0\n" > chrome/VERSION
+          echo "MAJOR=0`nMINOR=0`nBUILD=0`nPATCH=0`n" > chrome/VERSION
 
 
       - name: Build

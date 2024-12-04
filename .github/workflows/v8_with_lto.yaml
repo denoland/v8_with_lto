@@ -130,7 +130,7 @@ jobs:
 
           # file needs to exist for official windows build, just use dummy values.
           mkdir chrome
-          echo -e "MAJOR=0\nMINOR=0\nBUILD=0\nPATCH=0" > chrome/VERSION
+          echo -e "MAJOR=0\nMINOR=0\nBUILD=0\nPATCH=0\n" > chrome/VERSION
 
 
       - name: Build

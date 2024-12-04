@@ -98,7 +98,7 @@ jobs:
           SCCACHE_CACHE_SIZE: 128M
           SCCACHE_IDLE_TIMEOUT: 0
         run: |
-          $version = "0.8.2"
+          $version = "v0.8.2"
           $platform =
             @{ "x86_64-apple-darwin"       = "x86_64-apple-darwin"
                "aarch64-apple-darwin"      = "aarch64-apple-darwin"
@@ -106,7 +106,7 @@ jobs:
                "aarch64-unknown-linux-gnu" = "aarch64-unknown-linux-musl"
                "x86_64-pc-windows-msvc"    = "x86_64-pc-windows-msvc"
              }['${{ matrix.config.target }}']
-          $basename = "sccache-v$version-$platform"
+          $basename = "sccache-$version-$platform"
           $url = "https://github.com/mozilla/sccache/releases/download/$version/$basename.tar.gz"
           cd ~
           curl -LO $url

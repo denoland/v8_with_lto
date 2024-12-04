@@ -23,21 +23,26 @@ jobs:
         config:
           #- os: macos-13
           #  target: x86_64-apple-darwin
+          #  clang_base_path: '/usr'
 
           #- os: macos-14
           #  target: aarch64-apple-darwin
+          #  clang_base_path: '/usr'
 
-          - os: ${{ github.repository == 'denoland/deno' && 'ubuntu-22.04-xl' || 'ubuntu-22.04-xl' }}
+          - os: ${{ github.repository == 'denoland/deno' && 'ubuntu-22.04-xl' || 'ubuntu-22.04' }}
             target: x86_64-unknown-linux-gnu
+            clang_base_path: '/usr/lib/llvm-19'
 
           #- os: ${{ github.repository == 'denoland/deno' && 'windows-2022-xxl' || 'windows-2022' }}
           #  target: x86_64-pc-windows-msvc
+          #  clang_base_path: '/usr'
 
           #- os: ${{ github.repository == 'denoland/deno' && 'ubuntu-22.04-xl' || 'ubuntu-22.04' }}
           #  target: aarch64-unknown-linux-gnu
+          #  clang_base_path: '/usr'
 
     env:
-      CLANG_BASE_PATH: ${{ contains(matrix.config.target, 'linux') && '/usr/lib/llvm-19' || '/usr' }}
+      CLANG_BASE_PATH: ${{ matrix.config.clang_base_path }}
       V8_FROM_SOURCE: 1
       EXTRA_GN_ARGS: 'is_official_build=true chrome_pgo_phase=0 is_cfi=false clang_version=19'
       LIB_NAME: ${{ contains(matrix.config.target, 'windows') && 'rusty_v8' || 'librusty_v8' }}

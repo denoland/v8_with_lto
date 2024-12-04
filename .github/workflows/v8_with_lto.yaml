@@ -57,7 +57,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: 'denoland/rusty_v8'
-          ref: 'v130.0.1'
+          ref: '75dd61537da38bc239b527174a61ae75ae19da7b'
           fetch-depth: 10
           submodules: recursive
 

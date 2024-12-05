@@ -5,6 +5,8 @@ on:
     inputs:
       ref:
         required: true
+      publish:
+        type: boolean
 
 permissions: write-all
 
@@ -162,6 +164,7 @@ jobs:
           ls -l target/src_binding_release_${{ matrix.config.target }}.rs
 
       - name: Binary publish
+        if: github.event.inputs.publish
         uses: softprops/action-gh-release@v0.1.15
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

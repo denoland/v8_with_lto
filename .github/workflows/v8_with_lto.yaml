@@ -155,11 +155,11 @@ jobs:
 
       - name: Prepare binary publish
         run: |
-          gzip -9c target/${{ matrix.config.target }}/release/gn_out/obj/${{ env.LIB_NAME }}.${{ env.LIB_EXT }} > target/${{ env.LIB_NAME }}_lto_${{ matrix.config.target }}.${{ env.LIB_EXT }}.gz
-          ls -l target/${{ env.LIB_NAME }}_lto_${{ matrix.config.target }}.${{ env.LIB_EXT }}.gz
+          gzip -9c target/${{ matrix.config.target }}/release/gn_out/obj/${{ env.LIB_NAME }}.${{ env.LIB_EXT }} > target/${{ env.LIB_NAME }}_release_${{ matrix.config.target }}.${{ env.LIB_EXT }}.gz
+          ls -l target/${{ env.LIB_NAME }}_release_${{ matrix.config.target }}.${{ env.LIB_EXT }}.gz
 
-          cp target/${{ matrix.config.target }}/release/gn_out/src_binding.rs target/src_binding_lto_${{ matrix.config.target }}.rs
-          ls -l target/src_binding_lto_${{ matrix.config.target }}.rs
+          cp target/${{ matrix.config.target }}/release/gn_out/src_binding.rs target/src_binding_release_${{ matrix.config.target }}.rs
+          ls -l target/src_binding_release_${{ matrix.config.target }}.rs
 
       - name: Binary publish
         uses: softprops/action-gh-release@v0.1.15
@@ -169,5 +169,5 @@ jobs:
           name: ${{ github.event.inputs.ref }}
           tag_name: ${{ github.event.inputs.ref }}
           files: |
-            target/${{ env.LIB_NAME }}_lto_${{ matrix.config.target }}.${{ env.LIB_EXT }}.gz
-            target/src_binding_lto_${{ matrix.config.target }}.rs
+            target/${{ env.LIB_NAME }}_release_${{ matrix.config.target }}.${{ env.LIB_EXT }}.gz
+            target/src_binding_release_${{ matrix.config.target }}.rs
